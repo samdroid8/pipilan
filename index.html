@@ -308,6 +308,22 @@ nav button{font-size:clamp(16px,1.2vw,20px);padding:9px 12px;letter-spacing:0}
 
 /* Mention discrète en bas de la page des partenaires */
 .fake-sponsors-disclaimer{margin:22px 0 0;padding:0;background:none;border:0;border-radius:0;font-size:13px;line-height:1.4;color:#858c83;text-align:center}
+
+/* Archives uniquement : le survol des enfants ne déclenche pas les contours des parents */
+.archive-main .neon-target>.edge-runner .soft-halo,
+.archive-main .neon-target>.edge-runner .wide-glow,
+.archive-main .neon-target>.edge-runner .light-trail,
+.archive-main .neon-target>.edge-runner .light-head{opacity:0!important}
+.archive-main .neon-target.archive-neon-active>.edge-runner .soft-halo,
+.archive-main .neon-target.archive-neon-active>.edge-runner .wide-glow,
+.archive-main .neon-target.archive-neon-active>.edge-runner .light-trail,
+.archive-main .neon-target.archive-neon-active>.edge-runner .light-head{opacity:1!important}
+@media(prefers-reduced-motion:reduce){
+ .archive-main .neon-target.archive-neon-active>.edge-runner .soft-halo,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .wide-glow,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .light-trail,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .light-head{opacity:0!important}
+}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
@@ -372,13 +388,40 @@ function page(p){if(p==='archives-2024')return archive2024Page();if(p.startsWith
 
 let edgeObserver;
 
+/* Dans les archives : un seul contour lumineux, celui de l'encart directement visé. */
+let activeArchiveNeon=null;
+function setArchiveNeon(el){
+ if(activeArchiveNeon===el)return;
+ if(activeArchiveNeon){
+  activeArchiveNeon.classList.remove('archive-neon-active');
+  stopRunner(activeArchiveNeon);
+ }
+ activeArchiveNeon=el;
+ if(el){
+  el.classList.add('archive-neon-active');
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el);
+ }
+}
+document.addEventListener('pointermove',e=>{
+ const target=e.target instanceof Element?e.target:null;
+ setArchiveNeon(target?.closest('.archive-main .neon-target')||null);
+},{passive:true});
+document.addEventListener('pointerleave',()=>setArchiveNeon(null));
+document.addEventListener('focusin',e=>{
+ const target=e.target instanceof Element?e.target:null;
+ const archive=target?.closest('.archive-main');
+ if(archive)setArchiveNeon(target.closest('.neon-target')||archive);
+});
+document.addEventListener('focusout',e=>{
+ if(!e.relatedTarget?.closest?.('.archive-main'))setArchiveNeon(null);
+});
 function attachEdgeRunners(){
  if(edgeObserver)edgeObserver.disconnect();
  if(!window.ResizeObserver)return;
  edgeObserver=new ResizeObserver(entries=>{
   for(const {target} of entries){
    drawRunner(target);
-   if(target.matches(':hover') || target.contains(document.activeElement)){
+   if((!target.closest('.archive-main') || target===activeArchiveNeon) && (target.matches(':hover') || target.contains(document.activeElement))){
     if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(target);
    }
   }
@@ -400,9 +443,9 @@ function attachEdgeRunners(){
    ['#C4F36D','#ffce4b','#ff8738','#FA1309'][i%4];
   el.style.setProperty('--runner-color',accent.trim());
   if(!el.dataset.neonInitialized){
-   el.addEventListener('pointerenter',()=>{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el)},{passive:true});
+   el.addEventListener('pointerenter',()=>{if(!el.closest('.archive-main')&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el)},{passive:true});
    el.addEventListener('pointerleave',()=>stopRunner(el),{passive:true});
-   el.addEventListener('focusin',()=>{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el)});
+   el.addEventListener('focusin',()=>{if(!el.closest('.archive-main')&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el)});
    el.addEventListener('focusout',e=>{if(!el.contains(e.relatedTarget))stopRunner(el)});
    el.dataset.neonInitialized='true';
   }
