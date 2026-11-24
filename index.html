@@ -372,42 +372,33 @@ nav button{font-size:clamp(16px,1.2vw,20px);padding:9px 12px;letter-spacing:0}
  .countdown-note{font-size:13px}
 }
 
-/* Néons mobiles dédiés : tracés courts sur les bords, sans déformation du réseau desktop */
-.mobile-neon-network{display:none}
-@media(max-width:680px){
- .neon-network{display:none!important}
- .mobile-neon-network{position:fixed;inset:0;display:block;width:100vw;height:100dvh;z-index:0;pointer-events:none;overflow:hidden;opacity:.78}
- .mobile-neon-network .mobile-neon-soft{opacity:.48}
- .mobile-neon-network .mobile-neon-line{opacity:.85}
- .wire{display:none!important}
- .backdrop{background:radial-gradient(ellipse 38% 30% at 0 18%,#C4F36D12,transparent),radial-gradient(ellipse 42% 27% at 100% 45%,#FA130911,transparent),#050505}
+
+/* Téléphones : les survols tactiles ne doivent plus lancer des traînées qui restent figées.
+   On conserve un contour net et une lueur douce pendant la pression. */
+@media (hover:none), (pointer:coarse){
+ .neon-target>.edge-runner .soft-halo,
+ .neon-target>.edge-runner .wide-glow,
+ .neon-target>.edge-runner .light-trail,
+ .neon-target>.edge-runner .light-head,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .soft-halo,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .wide-glow,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .light-trail,
+ .archive-main .neon-target.archive-neon-active>.edge-runner .light-head{
+   display:none!important;
+   opacity:0!important;
+ }
+ .neon-target>.edge-runner .base{opacity:.3;stroke-width:1.6}
+ .neon-target:active{filter:brightness(1.08)}
+ .tile:active,.game-card:active,.archive-choice:active,.tabs button:active,.cta:active,.game-back:active{
+   box-shadow:0 0 12px color-mix(in srgb,var(--runner-color,#C4F36D) 42%,transparent);
+ }
 }
-@media(prefers-reduced-motion:reduce){.mobile-neon-network{transition:none}}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
 <defs><linearGradient id="connected-neon" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C4F36D"/><stop offset=".29" stop-color="#e6f060"/><stop offset=".53" stop-color="#ffc457"/><stop offset=".74" stop-color="#ff8738"/><stop offset="1" stop-color="#FA1309"/></linearGradient><filter id="connected-blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="7"/></filter></defs>
 <g class="network-halo" stroke="url(#connected-neon)" fill="none" stroke-width="12" filter="url(#connected-blur)"><path d="M-45 178 H118 Q157 178 180 149 L230 101 Q253 79 291 79 H544 Q590 79 606 112 L633 159 Q647 181 690 181 H940 Q983 181 1009 149 L1051 102 Q1076 75 1113 75 H1485"/><path d="M-45 200 H127 Q163 200 196 168 L246 123 Q263 104 303 104 H530 Q571 104 585 133 L611 177 Q634 209 681 209 H952 Q996 209 1028 170 L1073 123 Q1090 103 1127 103 H1485"/><path d="M-45 387 H247 Q291 387 310 418 L346 472 Q360 496 398 496 H678 Q726 496 750 466 L795 410 Q812 388 850 388 H1098 Q1142 388 1171 427 L1202 469 Q1220 491 1257 491 H1485"/><path d="M-45 611 H83 Q126 611 153 579 L205 515 Q226 489 264 489 H500 Q545 489 571 520 L620 576 Q643 605 687 605 H941 Q984 605 1003 582 L1060 511 Q1079 488 1118 488 H1485"/><path d="M-45 779 H187 Q232 779 254 807 L302 859 Q325 882 374 882 H623 Q665 882 688 856 L749 781 Q766 757 808 757 H1065 Q1104 757 1130 789 L1183 847 Q1203 873 1244 873 H1485"/></g>
 <g class="network-lines" stroke="url(#connected-neon)" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M-45 178 H118 Q157 178 180 149 L230 101 Q253 79 291 79 H544 Q590 79 606 112 L633 159 Q647 181 690 181 H940 Q983 181 1009 149 L1051 102 Q1076 75 1113 75 H1485"/><path d="M-45 200 H127 Q163 200 196 168 L246 123 Q263 104 303 104 H530 Q571 104 585 133 L611 177 Q634 209 681 209 H952 Q996 209 1028 170 L1073 123 Q1090 103 1127 103 H1485"/><path d="M-45 387 H247 Q291 387 310 418 L346 472 Q360 496 398 496 H678 Q726 496 750 466 L795 410 Q812 388 850 388 H1098 Q1142 388 1171 427 L1202 469 Q1220 491 1257 491 H1485"/><path d="M-45 611 H83 Q126 611 153 579 L205 515 Q226 489 264 489 H500 Q545 489 571 520 L620 576 Q643 605 687 605 H941 Q984 605 1003 582 L1060 511 Q1079 488 1118 488 H1485"/><path d="M-45 779 H187 Q232 779 254 807 L302 859 Q325 882 374 882 H623 Q665 882 688 856 L749 781 Q766 757 808 757 H1065 Q1104 757 1130 789 L1183 847 Q1203 873 1244 873 H1485"/></g>
-</svg>
-<svg class="mobile-neon-network" viewBox="0 0 400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-<defs>
- <linearGradient id="mobile-neon-left" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#C4F36D"/><stop offset="1" stop-color="#e5ec65"/></linearGradient>
- <linearGradient id="mobile-neon-right" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#ffab41"/><stop offset="1" stop-color="#FA1309"/></linearGradient>
- <filter id="mobile-neon-blur" x="-100%" y="-200%" width="300%" height="500%"><feGaussianBlur stdDeviation="5"/></filter>
-</defs>
-<g class="mobile-neon-soft" fill="none" stroke-width="9" stroke-linecap="round" filter="url(#mobile-neon-blur)">
- <path stroke="url(#mobile-neon-left)" d="M-35 170 H24 Q35 170 43 160 L67 133 Q76 121 92 121 H132"/>
- <path stroke="url(#mobile-neon-right)" d="M438 330 H372 Q354 330 343 347 L327 369 Q320 379 304 379 H276"/>
- <path stroke="url(#mobile-neon-left)" d="M-35 620 H38 Q54 620 66 637 L82 657 Q91 670 106 670 H140"/>
- <path stroke="url(#mobile-neon-right)" d="M434 802 H358 Q346 802 336 789 L318 769 Q308 757 294 757 H267"/>
-</g>
-<g class="mobile-neon-line" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
- <path stroke="url(#mobile-neon-left)" d="M-35 170 H24 Q35 170 43 160 L67 133 Q76 121 92 121 H132"/>
- <path stroke="url(#mobile-neon-right)" d="M438 330 H372 Q354 330 343 347 L327 369 Q320 379 304 379 H276"/>
- <path stroke="url(#mobile-neon-left)" d="M-35 620 H38 Q54 620 66 637 L82 657 Q91 670 106 670 H140"/>
- <path stroke="url(#mobile-neon-right)" d="M434 802 H358 Q346 802 336 789 L318 769 Q308 757 294 757 H267"/>
-</g>
 </svg>
 <div class="shell"><div class="header-bar"><nav id="nav" aria-label="Menu principal">
 <button data-page="accueil" class="active">Accueil</button><button data-page="programme">Programme</button><button data-page="jeux">Jeux & tournois</button><button data-page="classements">Classements</button><button data-page="infos">Infos pratiques</button><button data-page="archives">Archives</button><button data-page="partenaires">Partenaires</button>
@@ -553,7 +544,7 @@ function setArchiveNeon(el){
  activeArchiveNeon=el;
  if(el){
   el.classList.add('archive-neon-active');
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el);
+  if(!window.matchMedia('(hover:none), (pointer:coarse), (prefers-reduced-motion:reduce)').matches)animateRunner(el);
  }
 }
 document.addEventListener('pointermove',e=>{
@@ -612,6 +603,7 @@ function stopRunner(el){
 }
 function animateRunner(el){
  stopRunner(el);
+ if(window.matchMedia('(hover:none), (pointer:coarse), (prefers-reduced-motion:reduce)').matches)return;
  const rects=el.querySelectorAll(':scope > svg.edge-runner rect:not(.base)');
  const len=Number(el.dataset.pathLength)||0;
  if(!len)return;
