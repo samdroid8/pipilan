@@ -54,6 +54,32 @@ radial-gradient(ellipse 30% 25% at 100% 83%,#ff8a321a,transparent),
 .wire.e{right:-35vw;top:82vh;width:100vw;opacity:.50}
 .wire.f{left:-35vw;top:89vh;width:93vw;opacity:.46}
 }
+
+/* Nouvelle répartition des néons, plus présente dans les zones vides. */
+.hero-lockup{max-width:1120px;gap:2%;margin:38px auto 35px}
+.hero-lockup .logo{flex:1 1 73%;font-size:clamp(75px,13.2vw,166px);line-height:1.03;white-space:nowrap}
+.hero-controller{flex:0 0 25%;width:25%;max-width:290px}
+.wire.g{left:-4vw;top:31vh;width:min(34vw,480px);color:#ffcf4b;stroke:#ffcf4b;opacity:.79}
+.wire.h{right:-5vw;top:36vh;width:min(33vw,455px);color:#C4F36D;stroke:#C4F36D;opacity:.72}
+.wire.i{left:-7vw;top:93vh;width:min(43vw,570px);color:#ff8738;stroke:#ff8738;opacity:.75}
+.wire.j{right:-5vw;top:105vh;width:min(40vw,530px);color:#ffce4b;stroke:#ffce4b;opacity:.73}
+.wire.g path:nth-child(2),.wire.h path:nth-child(2),.wire.i path:nth-child(2),.wire.j path:nth-child(2){stroke-width:2;opacity:.48}
+.backdrop{background:
+ radial-gradient(ellipse 26% 22% at 1% 10%,#C4F36D22,transparent),
+ radial-gradient(ellipse 24% 24% at 98% 22%,#ff873820,transparent),
+ radial-gradient(ellipse 22% 20% at 6% 53%,#ffcf4b13,transparent),
+ radial-gradient(ellipse 23% 23% at 96% 57%,#FA13091a,transparent),
+ radial-gradient(ellipse 26% 20% at 8% 84%,#C4F36D13,transparent),
+ #050505}
+@media(max-width:680px){
+ .hero-lockup{gap:1%;margin:34px auto 32px}
+ .hero-lockup .logo{flex:1 1 72%;font-size:clamp(39px,11.5vw,80px)}
+ .hero-controller{flex:0 0 27%;width:27%;min-width:80px}
+ .wire.g{left:-25vw;top:35vh;width:85vw;opacity:.48}
+ .wire.h{right:-31vw;top:41vh;width:80vw;opacity:.45}
+ .wire.i{left:-33vw;top:88vh;width:92vw;opacity:.52}
+ .wire.j{right:-32vw;top:101vh;width:88vw;opacity:.47}
+}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="wire a" viewBox="0 0 500 240" aria-hidden="true"><path d="M-30 190 H45 Q75 190 110 140 L188 43 Q200 25 235 25 H530"/><path d="M-30 214 H48 Q86 214 126 156 L204 64 Q222 45 245 45 H530" opacity=".5"/></svg>
@@ -63,6 +89,11 @@ radial-gradient(ellipse 30% 25% at 100% 83%,#ff8a321a,transparent),
 <svg class="wire d" viewBox="0 0 580 300" aria-hidden="true"><path d="M-20 239 H120 Q154 239 179 208 L300 67 Q320 46 359 46 H605"/><path d="M-20 259 H127 Q166 259 195 221 L312 85 Q333 64 365 64 H605"/></svg>
 <svg class="wire e" viewBox="0 0 640 310" aria-hidden="true"><path d="M665 57 H440 Q407 57 388 86 L287 228 Q269 255 239 255 H-20"/><path d="M665 77 H451 Q420 77 402 103 L302 243 Q282 272 248 272 H-20"/></svg>
 <svg class="wire f" viewBox="0 0 560 255" aria-hidden="true"><path d="M-15 211 H154 Q185 211 206 189 L326 58 Q340 40 372 40 H580"/><path d="M-15 230 H158 Q193 230 223 201 L342 76 Q353 58 381 58 H580"/></svg>
+
+<svg class="wire g" viewBox="0 0 480 265" aria-hidden="true"><path d="M-25 228 H115 Q151 228 174 197 L260 91 Q287 60 323 60 H505"/><path d="M-25 247 H125 Q164 247 190 211 L276 110 Q299 80 339 80 H505"/></svg>
+<svg class="wire h" viewBox="0 0 455 275" aria-hidden="true"><path d="M475 205 H343 Q313 205 290 177 L197 74 Q178 54 148 54 H-20"/><path d="M475 227 H351 Q320 227 303 200 L212 97 Q190 75 157 75 H-20"/></svg>
+<svg class="wire i" viewBox="0 0 570 270" aria-hidden="true"><path d="M-20 218 H161 Q195 218 219 188 L316 63 Q333 41 368 41 H592"/><path d="M-20 240 H168 Q210 240 236 202 L332 83 Q349 61 382 61 H592"/></svg>
+<svg class="wire j" viewBox="0 0 530 265" aria-hidden="true"><path d="M551 43 H342 Q309 43 293 67 L210 176 Q188 201 150 201 H-20"/><path d="M551 63 H349 Q320 63 308 88 L226 195 Q203 222 164 222 H-20"/></svg>
 <div class="shell"><nav id="nav" aria-label="Menu principal">
 <button data-page="accueil" class="active">Accueil</button><button data-page="programme">Programme</button><button data-page="jeux">Jeux & tournois</button><button data-page="classements">Classements</button><button data-page="infos">Infos pratiques</button><button data-page="archives">Archives</button><button data-page="partenaires">Partenaires</button>
 </nav><main id="app"></main><footer class="footer"><strong>PIPILAN</strong><span>Prototype de l'événement · Informations à confirmer</span></footer></div>
