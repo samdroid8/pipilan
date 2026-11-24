@@ -28,25 +28,31 @@ nav:hover .edge-runner .soft-halo,nav:hover .edge-runner .wide-glow,nav:hover .e
 @media(max-width:680px){.hero-lockup{margin:30px auto 38px}.hero-lockup .logo{font-size:clamp(38px,10.5vw,75px)}.hero-controller{width:35%;min-width:94px}}
 @media(prefers-reduced-motion:reduce){.edge-runner rect{animation:none;stroke-dasharray:0 999999!important}}
 
-/* Décors supplémentaires : faisceaux néon fixes, lumineux mais aérés. */
-.backdrop{background:
- radial-gradient(ellipse 27% 22% at 10% 13%,#c4f36d1e,transparent 94%),
- radial-gradient(ellipse 24% 32% at 95% 24%,#fa130918,transparent 95%),
- radial-gradient(ellipse 30% 25% at 88% 75%,#ff873816,transparent 95%),
- radial-gradient(ellipse 24% 25% at 4% 84%,#c4f36d13,transparent 95%),
- radial-gradient(ellipse 33% 18% at 50% 97%,#fa13090d,transparent)}
-.wire{filter:drop-shadow(0 0 3px currentColor) drop-shadow(0 0 11px currentColor);opacity:.67}
+/* Néons d'arrière-plan : visibles à l'écran, pas de quadrillage */
+.wire{position:fixed;pointer-events:none;z-index:0;overflow:visible;fill:none;stroke-width:3.2;opacity:.88;filter:drop-shadow(0 0 3px currentColor) drop-shadow(0 0 9px currentColor) drop-shadow(0 0 19px currentColor)}
 .wire path{stroke-linecap:round;stroke-linejoin:round}
-.wire.c{width:min(37vw,510px);height:auto;right:-3vw;top:11vh;color:#ff9c48;stroke:#ff9c48;opacity:.61}
-.wire.d{width:min(43vw,580px);height:auto;left:-5vw;top:74vh;color:#C4F36D;stroke:#C4F36D;opacity:.62}
-.wire.e{width:min(48vw,640px);height:auto;right:-6vw;top:118vh;color:#FA1309;stroke:#FA1309;opacity:.52}
-.wire.f{width:min(42vw,560px);height:auto;left:-5vw;top:163vh;color:#ffce4b;stroke:#ffce4b;opacity:.47}
-.wire.c path:nth-child(2),.wire.d path:nth-child(2),.wire.e path:nth-child(2),.wire.f path:nth-child(2){opacity:.38;stroke-width:2}
+.wire.a{left:-7vw;top:9vh;width:min(43vw,570px);color:#C4F36D;stroke:#C4F36D}
+.wire.b{right:-8vw;top:48vh;width:min(36vw,490px);color:#FA1309;stroke:#FA1309}
+.wire.c{right:-7vw;top:13vh;width:min(43vw,585px);color:#ff9a40;stroke:#ff9a40;opacity:.9}
+.wire.d{left:-10vw;top:54vh;width:min(44vw,600px);color:#C4F36D;stroke:#C4F36D;opacity:.88}
+.wire.e{right:-8vw;top:76vh;width:min(46vw,630px);color:#FA1309;stroke:#FA1309;opacity:.78}
+.wire.f{left:-8vw;top:86vh;width:min(40vw,545px);color:#ffce4b;stroke:#ffce4b;opacity:.75}
+.wire.c path:nth-child(2),.wire.d path:nth-child(2),.wire.e path:nth-child(2),.wire.f path:nth-child(2){opacity:.52;stroke-width:2}
+.backdrop{background:
+radial-gradient(ellipse 31% 26% at 0% 14%,#C4F36D24,transparent),
+radial-gradient(ellipse 29% 29% at 100% 20%,#FA13091d,transparent),
+radial-gradient(ellipse 23% 34% at 0% 75%,#C4F36D19,transparent),
+radial-gradient(ellipse 30% 25% at 100% 83%,#ff8a321a,transparent),
+#050505}
+.backdrop:after{background:none}
+.floor{display:none!important}
 @media(max-width:680px){
- .wire.c{width:70vw;right:-24vw;top:19vh;opacity:.34}
- .wire.d{width:75vw;left:-30vw;top:83vh;opacity:.42}
- .wire.e{width:80vw;right:-35vw;top:138vh;opacity:.39}
- .wire.f{width:70vw;left:-30vw;top:189vh;opacity:.34}
+.wire.a{left:-32vw;top:15vh;width:93vw;opacity:.6}
+.wire.b{right:-31vw;top:51vh;width:85vw;opacity:.6}
+.wire.c{right:-35vw;top:24vh;width:95vw;opacity:.62}
+.wire.d{left:-36vw;top:65vh;width:100vw;opacity:.55}
+.wire.e{right:-35vw;top:82vh;width:100vw;opacity:.50}
+.wire.f{left:-35vw;top:89vh;width:93vw;opacity:.46}
 }
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
