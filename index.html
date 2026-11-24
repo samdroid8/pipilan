@@ -351,6 +351,26 @@ nav button{font-size:clamp(16px,1.2vw,20px);padding:9px 12px;letter-spacing:0}
 .countdown-separator{font-size:clamp(27px,4vw,53px);align-self:center;color:#ffe07c;line-height:1}
 .countdown-note{font-size:17px;color:#aaa;margin:11px 0 0}
 @media(max-width:680px){.hero-lockup{margin-top:8px;margin-bottom:5px}.countdown-section{margin-bottom:24px;padding:5px 0 10px}.countdown-grid{gap:4px}.countdown-unit{border-radius:10px;padding:10px 1px 8px}.countdown-unit span{font-size:11px}.countdown-unit strong{font-size:clamp(26px,7vw,42px)}.countdown-separator{font-size:24px}}
+
+/* Compte à rebours compact, proportionné au logo PIPILAN */
+.countdown-section{max-width:600px;margin:0 auto 24px;padding:2px 10px 8px}
+.countdown-label{font-size:clamp(15px,1.7vw,20px);margin-bottom:9px;letter-spacing:.045em}
+.countdown-grid{max-width:540px;gap:clamp(4px,.8vw,9px)}
+.countdown-unit{padding:7px 4px 6px;border-radius:11px;box-shadow:0 0 10px #C4F36D21}
+.countdown-unit strong{font-size:clamp(27px,4vw,44px)}
+.countdown-unit span{font-size:clamp(11px,1.15vw,15px);margin-top:4px}
+.countdown-separator{font-size:clamp(21px,2.5vw,31px)}
+.countdown-note{font-size:15px;margin-top:7px}
+@media(max-width:680px){
+ .countdown-section{max-width:94%;padding:0 3px 7px;margin-bottom:17px}
+ .countdown-label{font-size:15px;margin-bottom:7px}
+ .countdown-grid{gap:3px}
+ .countdown-unit{padding:7px 2px 6px;border-radius:9px}
+ .countdown-unit strong{font-size:clamp(23px,6vw,33px)}
+ .countdown-unit span{font-size:10px}
+ .countdown-separator{font-size:20px}
+ .countdown-note{font-size:13px}
+}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
