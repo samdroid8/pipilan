@@ -193,6 +193,25 @@ nav button{font-size:clamp(16px,1.2vw,20px);padding:9px 12px;letter-spacing:0}
 .subtitle,.archive-main-intro p,.archive-description p,.panel p{font-size:clamp(18px,1.8vw,23px)}
 @media(max-width:800px){nav button{font-size:16px;padding:9px 11px}.discord-link span{font-size:17px}}
 @media(max-width:600px){.archive-choice{font-size:24px}.archive-titlebar strong{font-size:17px}.archive-main-intro h2{font-size:23px}.tile{font-size:18px}}
+
+/* Effet de contour cohérent sur tous les encarts et boutons */
+.neon-target{position:relative;isolation:isolate}
+.neon-target>.edge-runner{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible;flex:none}
+.neon-target:hover>.edge-runner .soft-halo,
+.neon-target:hover>.edge-runner .wide-glow,
+.neon-target:hover>.edge-runner .light-trail,
+.neon-target:hover>.edge-runner .light-head,
+.neon-target:focus-within>.edge-runner .soft-halo,
+.neon-target:focus-within>.edge-runner .wide-glow,
+.neon-target:focus-within>.edge-runner .light-trail,
+.neon-target:focus-within>.edge-runner .light-head{opacity:1}
+.neon-target:focus-visible{outline:2px solid #C4F36D;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+ .neon-target>.edge-runner .soft-halo,
+ .neon-target>.edge-runner .wide-glow,
+ .neon-target>.edge-runner .light-trail,
+ .neon-target>.edge-runner .light-head{display:none}
+}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
@@ -216,23 +235,38 @@ let edgeObserver;
 function attachEdgeRunners(){
  if(edgeObserver)edgeObserver.disconnect();
  if(!window.ResizeObserver)return;
- edgeObserver=new ResizeObserver(entries=>entries.forEach(({target})=>drawRunner(target)));
- document.querySelectorAll('nav,.outline,.tile,.panel').forEach((el,i)=>{
+ edgeObserver=new ResizeObserver(entries=>{
+  for(const {target} of entries){
+   drawRunner(target);
+   if(target.matches(':hover') || target.contains(document.activeElement)){
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(target);
+   }
+  }
+ });
+ const targets='nav,nav button,.outline,.tile,.panel,.rankings-intro,.game,.tabs button,.placeholder,.archive-main,.archive-window,.archive-choice,.discord-link,.cta,.video-box button';
+ document.querySelectorAll(targets).forEach((el,i)=>{
+  el.classList.add('neon-target');
   let svg=el.querySelector(':scope > svg.edge-runner');
   if(!svg){
-    svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.classList.add('edge-runner');svg.setAttribute('aria-hidden','true');
-    svg.innerHTML='<rect class="base"/><rect class="soft-halo"/><rect class="wide-glow"/><rect class="light-trail"/><rect class="light-head"/>';
-    el.appendChild(svg);
+   svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   svg.classList.add('edge-runner');svg.setAttribute('aria-hidden','true');
+   svg.innerHTML='<rect class="base"/><rect class="soft-halo"/><rect class="wide-glow"/><rect class="light-trail"/><rect class="light-head"/>';
+   el.appendChild(svg);
   }
-  el.style.setProperty('--runner-color',el.style.getPropertyValue('--accent')||['#C4F36D','#ffce4b','#ff8738','#FA1309'][i%4]);
-  const start=()=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;animateRunner(el)};
-  const stop=()=>stopRunner(el);
-  el.addEventListener('pointerenter',start,{passive:true});
-  el.addEventListener('pointerleave',stop,{passive:true});
-  el.addEventListener('focusin',start);
-  el.addEventListener('focusout',e=>{if(!el.contains(e.relatedTarget))stop()});
-  edgeObserver.observe(el);drawRunner(el);
+  const accent=el.style.getPropertyValue('--accent')||
+   (el.classList.contains('archive-choice')?getComputedStyle(el).getPropertyValue('--year-color'):'')||
+   (el.classList.contains('discord-link')?'#9484ff':'')||
+   ['#C4F36D','#ffce4b','#ff8738','#FA1309'][i%4];
+  el.style.setProperty('--runner-color',accent.trim());
+  if(!el.dataset.neonInitialized){
+   el.addEventListener('pointerenter',()=>{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el)},{passive:true});
+   el.addEventListener('pointerleave',()=>stopRunner(el),{passive:true});
+   el.addEventListener('focusin',()=>{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)animateRunner(el)});
+   el.addEventListener('focusout',e=>{if(!el.contains(e.relatedTarget))stopRunner(el)});
+   el.dataset.neonInitialized='true';
+  }
+  edgeObserver.observe(el);
+  drawRunner(el);
  });
 }
 function stopRunner(el){
@@ -243,15 +277,12 @@ function animateRunner(el){
  const rects=el.querySelectorAll(':scope > svg.edge-runner rect:not(.base)');
  const len=Number(el.dataset.pathLength)||0;
  if(!len)return;
- const duration=4400;
  rects.forEach(rect=>{
    const cls=rect.getAttribute('class');
-   const dash=({'soft-halo':160,'wide-glow':110,'light-trail':64,'light-head':10})[cls]||12;
-   // Make the brighter leading spark follow the faded tail in the same direction.
    const offset=({'soft-halo':80,'wide-glow':50,'light-trail':23,'light-head':0})[cls]||0;
    rect.animate(
-     [{strokeDashoffset:String(offset)},{strokeDashoffset:String(offset-len)}],
-     {duration,iterations:Infinity,easing:'linear',fill:'forwards'}
+    [{strokeDashoffset:String(offset)},{strokeDashoffset:String(offset-len)}],
+    {duration:4400,iterations:Infinity,easing:'linear',fill:'forwards'}
    );
  });
 }
@@ -270,7 +301,8 @@ function drawRunner(el){
   len=rect.getTotalLength();
   if(rect.classList.contains('base')){rect.style.strokeDasharray='none';continue}
   const dash=({'soft-halo':160,'wide-glow':110,'light-trail':64,'light-head':10})[rect.getAttribute('class')]||10;
-  rect.style.strokeDasharray=Math.min(dash,len*.26)+' '+Math.max(1,len-Math.min(dash,len*.26));
+  const d=Math.min(dash,len*.26);
+  rect.style.strokeDasharray=d+' '+Math.max(1,len-d);
   rect.style.strokeDashoffset='0';
  }
  el.dataset.pathLength=String(len);
