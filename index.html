@@ -80,20 +80,19 @@ radial-gradient(ellipse 30% 25% at 100% 83%,#ff8a321a,transparent),
  .wire.i{left:-33vw;top:88vh;width:92vw;opacity:.52}
  .wire.j{right:-32vw;top:101vh;width:88vw;opacity:.47}
 }
+
+/* Réseau néon unique : lignes continues entre les côtés gauche et droit. */
+.neon-network{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;overflow:visible;opacity:.82}
+.neon-network .network-halo{opacity:.48}
+.neon-network .network-lines{opacity:.82}
+@media(max-width:680px){.neon-network{opacity:.54}.neon-network .network-halo{opacity:.35}}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
-<svg class="wire a" viewBox="0 0 500 240" aria-hidden="true"><path d="M-30 190 H45 Q75 190 110 140 L188 43 Q200 25 235 25 H530"/><path d="M-30 214 H48 Q86 214 126 156 L204 64 Q222 45 245 45 H530" opacity=".5"/></svg>
-<svg class="wire b" viewBox="0 0 450 270" aria-hidden="true"><path d="M-20 232 H230 Q255 232 275 207 L354 45 Q367 22 400 22 H475"/><path d="M-20 256 H250 Q270 256 290 227 L375 66 Q387 45 416 45 H475" opacity=".55"/></svg>
-
-<svg class="wire c" viewBox="0 0 510 270" aria-hidden="true"><path d="M-20 30 H320 Q346 30 365 54 L445 161 Q461 182 494 182 H535"/><path d="M-20 51 H307 Q335 51 352 73 L428 179 Q449 201 490 201 H535"/></svg>
-<svg class="wire d" viewBox="0 0 580 300" aria-hidden="true"><path d="M-20 239 H120 Q154 239 179 208 L300 67 Q320 46 359 46 H605"/><path d="M-20 259 H127 Q166 259 195 221 L312 85 Q333 64 365 64 H605"/></svg>
-<svg class="wire e" viewBox="0 0 640 310" aria-hidden="true"><path d="M665 57 H440 Q407 57 388 86 L287 228 Q269 255 239 255 H-20"/><path d="M665 77 H451 Q420 77 402 103 L302 243 Q282 272 248 272 H-20"/></svg>
-<svg class="wire f" viewBox="0 0 560 255" aria-hidden="true"><path d="M-15 211 H154 Q185 211 206 189 L326 58 Q340 40 372 40 H580"/><path d="M-15 230 H158 Q193 230 223 201 L342 76 Q353 58 381 58 H580"/></svg>
-
-<svg class="wire g" viewBox="0 0 480 265" aria-hidden="true"><path d="M-25 228 H115 Q151 228 174 197 L260 91 Q287 60 323 60 H505"/><path d="M-25 247 H125 Q164 247 190 211 L276 110 Q299 80 339 80 H505"/></svg>
-<svg class="wire h" viewBox="0 0 455 275" aria-hidden="true"><path d="M475 205 H343 Q313 205 290 177 L197 74 Q178 54 148 54 H-20"/><path d="M475 227 H351 Q320 227 303 200 L212 97 Q190 75 157 75 H-20"/></svg>
-<svg class="wire i" viewBox="0 0 570 270" aria-hidden="true"><path d="M-20 218 H161 Q195 218 219 188 L316 63 Q333 41 368 41 H592"/><path d="M-20 240 H168 Q210 240 236 202 L332 83 Q349 61 382 61 H592"/></svg>
-<svg class="wire j" viewBox="0 0 530 265" aria-hidden="true"><path d="M551 43 H342 Q309 43 293 67 L210 176 Q188 201 150 201 H-20"/><path d="M551 63 H349 Q320 63 308 88 L226 195 Q203 222 164 222 H-20"/></svg>
+<svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
+<defs><linearGradient id="connected-neon" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#C4F36D"/><stop offset=".34" stop-color="#f8dd53"/><stop offset=".61" stop-color="#ff9138"/><stop offset="1" stop-color="#FA1309"/></linearGradient><filter id="connected-blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="7"/></filter></defs>
+<g class="network-halo" stroke="url(#connected-neon)" fill="none" stroke-width="12" filter="url(#connected-blur)"><path d="M-45 190 H135 Q168 190 192 162 L233 118 Q251 100 294 100 H590 Q644 100 674 137 L708 176 Q732 205 778 205 H1114 Q1158 205 1182 174 L1232 122 Q1254 100 1294 100 H1485"/><path d="M-45 210 H143 Q178 210 204 183 L248 140 Q265 122 300 122 H581 Q635 122 656 153 L694 194 Q724 227 771 227 H1124 Q1170 227 1194 195 L1248 141 Q1267 122 1304 122 H1485"/><path d="M-45 480 H96 Q138 480 162 449 L212 396 Q235 372 276 372 H609 Q654 372 680 401 L731 449 Q757 477 804 477 H1117 Q1160 477 1186 451 L1250 392 Q1273 372 1310 372 H1485"/><path d="M-45 503 H102 Q145 503 177 466 L227 415 Q250 393 285 393 H599 Q648 393 665 419 L714 470 Q744 499 796 499 H1127 Q1174 499 1201 468 L1266 412 Q1288 393 1315 393 H1485"/><path d="M-45 829 H98 Q140 829 169 802 L231 743 Q253 720 299 720 H612 Q668 720 696 751 L739 795 Q762 820 805 820 H1120 Q1165 820 1198 791 L1250 744 Q1276 720 1315 720 H1485"/><path d="M-45 849 H105 Q154 849 185 820 L247 763 Q272 741 306 741 H601 Q663 741 681 770 L724 816 Q753 841 801 841 H1129 Q1179 841 1214 810 L1266 763 Q1293 741 1324 741 H1485"/></g>
+<g class="network-lines" stroke="url(#connected-neon)" fill="none" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M-45 190 H135 Q168 190 192 162 L233 118 Q251 100 294 100 H590 Q644 100 674 137 L708 176 Q732 205 778 205 H1114 Q1158 205 1182 174 L1232 122 Q1254 100 1294 100 H1485"/><path d="M-45 210 H143 Q178 210 204 183 L248 140 Q265 122 300 122 H581 Q635 122 656 153 L694 194 Q724 227 771 227 H1124 Q1170 227 1194 195 L1248 141 Q1267 122 1304 122 H1485"/><path d="M-45 480 H96 Q138 480 162 449 L212 396 Q235 372 276 372 H609 Q654 372 680 401 L731 449 Q757 477 804 477 H1117 Q1160 477 1186 451 L1250 392 Q1273 372 1310 372 H1485"/><path d="M-45 503 H102 Q145 503 177 466 L227 415 Q250 393 285 393 H599 Q648 393 665 419 L714 470 Q744 499 796 499 H1127 Q1174 499 1201 468 L1266 412 Q1288 393 1315 393 H1485"/><path d="M-45 829 H98 Q140 829 169 802 L231 743 Q253 720 299 720 H612 Q668 720 696 751 L739 795 Q762 820 805 820 H1120 Q1165 820 1198 791 L1250 744 Q1276 720 1315 720 H1485"/><path d="M-45 849 H105 Q154 849 185 820 L247 763 Q272 741 306 741 H601 Q663 741 681 770 L724 816 Q753 841 801 841 H1129 Q1179 841 1214 810 L1266 763 Q1293 741 1324 741 H1485"/></g>
+</svg>
 <div class="shell"><nav id="nav" aria-label="Menu principal">
 <button data-page="accueil" class="active">Accueil</button><button data-page="programme">Programme</button><button data-page="jeux">Jeux & tournois</button><button data-page="classements">Classements</button><button data-page="infos">Infos pratiques</button><button data-page="archives">Archives</button><button data-page="partenaires">Partenaires</button>
 </nav><main id="app"></main><footer class="footer"><strong>PIPILAN</strong><span>Prototype de l'événement · Informations à confirmer</span></footer></div>
@@ -173,31 +172,4 @@ function go(p){if(!headings[p]&&p!=='accueil')p='accueil';app.innerHTML=p==='acc
 document.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b){go(b.dataset.page);return}const t=e.target.closest('[data-tab]');if(t){document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('selected',x===t));document.querySelector('#ranking').textContent='Aucun résultat publié pour '+(t.dataset.tab==='general'?'le classement général':games[Number(t.dataset.tab)][0])+'.';return}if(e.target.closest('#preview')){const x=e.target.closest('#preview');x.textContent='Vidéo MP4 à venir';x.style.width='auto';x.style.padding='15px 20px';x.style.fontSize='14px';x.style.borderRadius='28px'}});
 go(location.hash.slice(1)||'accueil');
 
-const neonWires=[...document.querySelectorAll('.wire')].map(svg=>({svg,paths:[...svg.querySelectorAll('path')]}));
-let lastPoint=null;
-function glowNearby(x,y){
- for(const {svg,paths} of neonWires){
-  let near=false;
-  for(const path of paths){
-   const len=path.getTotalLength(),matrix=path.getScreenCTM();
-   if(!matrix)continue;
-   const step=Math.max(1,Math.ceil(len/44));
-   for(let i=0;i<=step;i++){
-    const p=path.getPointAtLength(len*i/step);
-    const sx=p.x*matrix.a+p.y*matrix.c+matrix.e;
-    const sy=p.x*matrix.b+p.y*matrix.d+matrix.f;
-    if((sx-x)**2+(sy-y)**2<75*75){near=true;break}
-   }
-   if(near)break;
-  }
-  svg.classList.toggle('lit',near);
- }
-}
-let scheduled=false;
-document.addEventListener('pointermove',ev=>{
- if(ev.pointerType==='touch')return;
- lastPoint={x:ev.clientX,y:ev.clientY};
- if(!scheduled){scheduled=true;requestAnimationFrame(()=>{scheduled=false;if(lastPoint)glowNearby(lastPoint.x,lastPoint.y)})}
-});
-document.addEventListener('pointerleave',()=>neonWires.forEach(({svg})=>svg.classList.remove('lit')));
 </script></body></html>
