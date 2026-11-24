@@ -12,16 +12,16 @@ nav,.outline,.tile,.panel{position:relative}
 .edge-runner rect{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .edge-runner .trail{stroke:var(--runner-color,#C4F36D);stroke-width:4;opacity:.55;filter:drop-shadow(0 0 7px var(--runner-color,#C4F36D));}
 .edge-runner .head{stroke:#fff;stroke-width:3.5;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px var(--runner-color,#C4F36D));}
-.edge-runner rect{animation:neonChase var(--run-speed,6s) linear infinite}
-@keyframes neonChase{to{stroke-dashoffset:calc(-1 * var(--run-length))}}
+
+}
 nav:hover .edge-runner .head,.outline:hover .edge-runner .head,.tile:hover .edge-runner .head{stroke-width:5;filter:drop-shadow(0 0 10px #fff) drop-shadow(0 0 18px var(--runner-color,#C4F36D))}
 .hero-lockup{display:flex;align-items:center;justify-content:center;gap:0;margin:54px auto 50px;max-width:1060px}
 .hero-lockup .logo{flex:1;min-width:0;margin:0;text-align:center;font-size:clamp(52px,10.8vw,128px)}
-.hero-controller{width:31%;max-width:315px;min-width:110px;height:auto;overflow:visible;filter:drop-shadow(0 0 12px #c4f36d77);transform:rotate(5deg);transition:filter .25s ease,transform .25s ease}
+.hero-controller{width:31%;max-width:315px;min-width:110px;height:auto;object-fit:contain;filter:drop-shadow(0 0 12px #c4f36d70);transform:rotate(4deg);transition:filter .25s ease,transform .25s ease}
 .hero-controller:hover{filter:drop-shadow(0 0 19px #c4f36daa) drop-shadow(0 0 19px #fa130966);transform:rotate(2deg) scale(1.04)}
 @media(max-width:680px){.hero-lockup{margin:30px auto 38px}.hero-lockup .logo{font-size:clamp(38px,10.5vw,75px)}.hero-controller{width:35%;min-width:94px}}
 @media(prefers-reduced-motion:reduce){.edge-runner rect{animation:none;stroke-dasharray:0 999999!important}}
-</style></head><body>
+</style><link rel="icon" type="image/webp" href="./assets/pipilan-controller.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="wire a" viewBox="0 0 500 240" aria-hidden="true"><path d="M-30 190 H45 Q75 190 110 140 L188 43 Q200 25 235 25 H530"/><path d="M-30 214 H48 Q86 214 126 156 L204 64 Q222 45 245 45 H530" opacity=".5"/></svg>
 <svg class="wire b" viewBox="0 0 450 270" aria-hidden="true"><path d="M-20 232 H230 Q255 232 275 207 L354 45 Q367 22 400 22 H475"/><path d="M-20 256 H250 Q270 256 290 227 L375 66 Q387 45 416 45 H475" opacity=".55"/></svg>
@@ -30,16 +30,19 @@ nav:hover .edge-runner .head,.outline:hover .edge-runner .head,.tile:hover .edge
 </nav><main id="app"></main><footer class="footer"><strong>PIPILAN</strong><span>Prototype de l'événement · Informations à confirmer</span></footer></div>
 <script>
 const app=document.querySelector('#app');
-const controllerArt="<svg class=\"hero-controller\" viewBox=\"0 0 350 310\" aria-label=\"Manette PIPILAN avec poignée en bois\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n <linearGradient id=\"padShell\" x1=\"0\" y1=\"0\" x2=\".85\" y2=\"1\"><stop stop-color=\"#e4e6e4\"/><stop offset=\".5\" stop-color=\"#babdc1\"/><stop offset=\"1\" stop-color=\"#f0f0ee\"/></linearGradient>\n <linearGradient id=\"wood\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#f2bc72\"/><stop offset=\".5\" stop-color=\"#b87639\"/><stop offset=\"1\" stop-color=\"#86502c\"/></linearGradient>\n <linearGradient id=\"edgeGlow\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\".45\"><stop stop-color=\"#C4F36D\"/><stop offset=\".52\" stop-color=\"#ffe45b\"/><stop offset=\"1\" stop-color=\"#FA1309\"/></linearGradient>\n <filter id=\"padGlow\" x=\"-60%\" y=\"-60%\" width=\"220%\" height=\"220%\"><feGaussianBlur stdDeviation=\"6\"/></filter>\n</defs>\n<g transform=\"rotate(-7 175 140)\">\n <path d=\"M177 170c-25 6-12 19 5 23s7 14-6 19-18 15 3 21 14 17-5 19-14 17 10 24\" fill=\"none\" stroke=\"#9f9f9f\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n <rect x=\"169\" y=\"42\" width=\"12\" height=\"55\" rx=\"6\" fill=\"#9fa3a6\" stroke=\"#343535\" stroke-width=\"3\"/>\n <rect x=\"92\" y=\"17\" width=\"167\" height=\"45\" rx=\"17\" fill=\"url(#wood)\" stroke=\"#dbab6d\" stroke-width=\"4\"/>\n <path d=\"M108 31Q185 42 243 30M105 47Q182 39 245 47\" stroke=\"#f1ce8e\" stroke-width=\"2\" opacity=\".55\" fill=\"none\"/>\n <path d=\"M64 113Q75 93 116 91L255 87Q288 88 302 124L330 211Q336 239 316 247Q304 254 292 233L269 194Q261 179 244 179H116Q97 181 84 195L58 220Q38 237 24 221Q14 209 22 188Z\" fill=\"none\" stroke=\"url(#edgeGlow)\" stroke-width=\"13\" filter=\"url(#padGlow)\" opacity=\".78\"/>\n <path d=\"M64 113Q75 93 116 91L255 87Q288 88 302 124L330 211Q336 239 316 247Q304 254 292 233L269 194Q261 179 244 179H116Q97 181 84 195L58 220Q38 237 24 221Q14 209 22 188Z\" fill=\"url(#padShell)\" stroke=\"url(#edgeGlow)\" stroke-width=\"4\"/>\n <circle cx=\"111\" cy=\"127\" r=\"20\" fill=\"#242729\" stroke=\"#7c8080\" stroke-width=\"5\"/><ellipse cx=\"106\" cy=\"119\" rx=\"14\" ry=\"13\" fill=\"#3b3c3e\"/>\n <path d=\"M85 160h14v-13h15v13h14v14h-14v14H99v-14H85z\" fill=\"#3b3c3e\" stroke=\"#595b5c\" stroke-width=\"2\"/>\n <circle cx=\"191\" cy=\"164\" r=\"19\" fill=\"#222426\" stroke=\"#858888\" stroke-width=\"5\"/><ellipse cx=\"187\" cy=\"155\" rx=\"13\" ry=\"11\" fill=\"#414344\"/>\n <text x=\"157\" y=\"118\" font-size=\"19\" fill=\"#e31f16\" font-style=\"italic\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\">PIPILAN</text>\n <circle cx=\"262\" cy=\"127\" r=\"11\" fill=\"#252525\"/><circle cx=\"262\" cy=\"127\" r=\"7\" fill=\"#e8c52e\"/>\n <circle cx=\"281\" cy=\"146\" r=\"11\" fill=\"#252525\"/><circle cx=\"281\" cy=\"146\" r=\"7\" fill=\"#e33426\"/>\n <circle cx=\"244\" cy=\"149\" r=\"11\" fill=\"#252525\"/><circle cx=\"244\" cy=\"149\" r=\"7\" fill=\"#2970cc\"/>\n <circle cx=\"260\" cy=\"167\" r=\"11\" fill=\"#252525\"/><circle cx=\"260\" cy=\"167\" r=\"7\" fill=\"#43b94a\"/>\n</g></svg>";
+const controllerArt='<img class="hero-controller" src="./assets/pipilan-controller.webp" alt="Manette PIPILAN" loading="eager" decoding="async">';
 const games=[['Halo Infinite','FPS multijoueur','#C4F36D'],['Witch It','Cache-cache multijoueur','#ffdf55'],['Golf With Your Friends','Mini-golf multijoueur','#ff8e39'],['Jeu mystère','Révélation à venir','#FA1309']];
 function home(){return '<div class="hero-lockup"><h1 class="logo">PIPILAN</h1>'+controllerArt+'</div><div class="hero-grid"><div class="outline"><div class="video-box"><button id="preview" title="Teaser à intégrer au format MP4">▶</button></div></div><div class="outline info"><h2>◫ PIPILAN</h2><div class="rule"></div><span class="muted">PROCHAINE ÉDITION</span><b>Date à annoncer</b><span class="muted">Lieu à confirmer</span><div class="rule"></div><span class="muted">Inscriptions directement auprès des organisateurs</span></div></div><div class="tiles"><button class="tile" data-page="jeux" style="--accent:#C4F36D"><span class="symbol">⌘</span>JEUX & TOURNOIS</button><button class="tile" data-page="archives" style="--accent:#ffe05b"><span class="symbol">▧</span>ARCHIVES</button><button class="tile" data-page="programme" style="--accent:#ff923d"><span class="symbol">▦</span>PROGRAMME</button><button class="tile" data-page="infos" style="--accent:#FA1309"><span class="symbol">ⓘ</span>INFOS PRATIQUES</button></div><div class="scroll">⌄</div><section class="panel"><h2>Bienvenue à PIPILAN</h2><p>Quatre tournois : Halo Infinite, Witch It, Golf With Your Friends et un jeu mystère. Les équipes de trois joueurs sont reformées après chaque jeu.</p></section>'}
 const headings={programme:'Programme',jeux:'Jeux & tournois',classements:'Classements',infos:'Infos pratiques',archives:'Archives',partenaires:'Partenaires'};
 function page(p){let start='<h1 class="page-title">'+headings[p]+'</h1><div class="rule"></div>';if(p==='jeux')return start+'<p class="subtitle">Quatre tournois organisés. Les équipes de trois sont recomposées après chaque jeu.</p><div class="cards">'+games.map((g,i)=>'<article class="game" style="--accent:'+g[2]+'"><div class="num">TOURNOI 0'+(i+1)+'</div><h2>'+g[0]+'</h2><p>'+g[1]+'</p><p>Format et horaires à confirmer.</p></article>').join('')+'</div>';if(p==='classements')return start+'<p class="subtitle">Classements par tournoi et classement général individuel cumulant les résultats des jeux terminés.</p><div class="tabs" id="tabs"><button class="selected" data-tab="general">Général individuel</button>'+games.map((g,i)=>'<button data-tab="'+i+'">'+g[0]+'</button>').join('')+'</div><div class="placeholder" id="ranking">Les résultats seront visibles ici après validation des organisateurs.</div>';if(p==='programme')return start+'<div class="panel"><h2>Programme à venir</h2><p>Les horaires et les animations seront ajoutés dès qu’ils seront fixés.</p></div>';if(p==='infos')return start+'<div class="panel"><h2>Préparer sa venue</h2><p>Adresse, horaires, accès et matériel à prévoir seront communiqués ici. Les joueurs s’inscrivent directement auprès de l’organisation : pas de formulaire d’inscription en ligne.</p></div>';if(p==='archives')return start+'<div class="panel"><h2>Éditions précédentes</h2><p>Cette page accueillera les photos, vidéos et souvenirs des anciennes PIPILAN.</p></div>';return start+'<div class="panel"><h2>Nos partenaires</h2><p>Les logos et présentations des partenaires seront ajoutés une fois confirmés.</p></div>'}
 
 let edgeObserver;
+
+let edgeObserver;
 function attachEdgeRunners(){
  if(edgeObserver)edgeObserver.disconnect();
- edgeObserver=new ResizeObserver(entries=>{for(const e of entries){const el=e.target;drawRunner(el)}});
+ if(!window.ResizeObserver)return;
+ edgeObserver=new ResizeObserver(entries=>{for(const e of entries)drawRunner(e.target)});
  document.querySelectorAll('nav,.outline,.tile,.panel').forEach((el,i)=>{
    if(!el.querySelector(':scope > svg.edge-runner')){
      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
@@ -48,8 +51,9 @@ function attachEdgeRunners(){
      svg.innerHTML='<rect class="trail"/><rect class="head"/>';
      el.appendChild(svg);
    }
-   el.style.setProperty('--runner-color',el.style.getPropertyValue('--accent')||(['#C4F36D','#ffcf4b','#ff9038','#FA1309'][i%4]));
-   el.style.setProperty('--run-speed',(5.4+(i%4)*.9)+'s');
+   const accent=el.style.getPropertyValue('--accent')||['#C4F36D','#ffcf4b','#ff9038','#FA1309'][i%4];
+   el.style.setProperty('--runner-color',accent);
+   el.dataset.runnerSpeed=String(5300+i%4*710);
    edgeObserver.observe(el);
    drawRunner(el);
  });
@@ -59,12 +63,22 @@ function drawRunner(el){
  const w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;
  const rad=Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius)||18,Math.min(w,h)/2);
  svg.setAttribute('viewBox','0 0 '+w+' '+h);
+ svg.setAttribute('width',w);svg.setAttribute('height',h);
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  for(const rect of svg.querySelectorAll('rect')){
-   rect.setAttribute('x','2');rect.setAttribute('y','2');rect.setAttribute('width',Math.max(w-4,1));rect.setAttribute('height',Math.max(h-4,1));rect.setAttribute('rx',Math.max(rad-2,0));
+   rect.getAnimations().forEach(a=>a.cancel());
+   rect.setAttribute('x','2');rect.setAttribute('y','2');
+   rect.setAttribute('width',Math.max(w-4,1));rect.setAttribute('height',Math.max(h-4,1));
+   rect.setAttribute('rx',Math.max(rad-2,0));
    const length=rect.getTotalLength();
-   rect.style.strokeDasharray=(rect.classList.contains('trail')?Math.min(130,length*.2):Math.min(22,length*.045))+' '+length;
-   rect.style.setProperty('--run-length',length);
+   const isHead=rect.classList.contains('head');
+   const dash=isHead?Math.max(9,Math.min(20,length*.035)):Math.max(65,Math.min(125,length*.17));
+   rect.style.strokeDasharray=dash+' '+length;
    rect.style.strokeDashoffset='0';
+   if(!reduce){
+     rect.animate([{strokeDashoffset:'0'},{strokeDashoffset:String(-length-dash)}],
+       {duration:Number(el.dataset.runnerSpeed)||6000,iterations:Infinity,easing:'linear'});
+   }
  }
 }
 function go(p){if(!headings[p]&&p!=='accueil')p='accueil';app.innerHTML=p==='accueil'?home():page(p);document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));history.replaceState(null,'','#'+p);attachEdgeRunners();scrollTo({top:0,behavior:'smooth'})}
