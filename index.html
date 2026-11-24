@@ -238,6 +238,30 @@ nav button{font-size:clamp(16px,1.2vw,20px);padding:9px 12px;letter-spacing:0}
 .game-detail-close{color:#fff;background:#151715;border:1px solid var(--accent);border-radius:20px;padding:7px 18px;font-size:20px}
 .game-detail-close:hover{background:var(--accent);color:#080808}
 @media(max-width:680px){.games-grid{grid-template-columns:1fr;gap:22px}.game-card-copy strong{font-size:26px}}
+
+/* Pages des jeux individuelles */
+.game-page{padding:30px 0 50px}
+.game-back{display:inline-flex;align-items:center;gap:10px;background:#090d09;border:1px solid var(--accent);border-radius:999px;color:var(--accent);padding:9px 18px;margin-bottom:27px;font-size:21px;cursor:pointer}
+.game-back:hover{box-shadow:0 0 14px var(--accent);color:white}
+.game-page-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:27px;align-items:center}
+.game-page-art{aspect-ratio:16/9;border:2px solid var(--accent);border-radius:22px;overflow:hidden;background:#0e1010;box-shadow:0 0 26px color-mix(in srgb,var(--accent) 35%,transparent)}
+.game-page-art img{width:100%;height:100%;object-fit:cover;display:block}
+.game-cover-mystery{height:100%;display:grid;place-items:center;font-size:clamp(110px,18vw,230px);font-family:var(--font-title);color:#ffb648;text-shadow:0 0 30px #FA1309;background:radial-gradient(circle,#57251a,#090808 70%)}
+.game-overline{color:var(--accent);font-size:19px;letter-spacing:.05em}
+.game-page .game-title{margin:15px 0;font-size:clamp(32px,4.8vw,60px);line-height:1.1;color:var(--accent)}
+.game-lead{font-size:clamp(21px,2.1vw,26px);line-height:1.35}
+.game-type{display:inline-block;border:1px solid var(--accent);border-radius:50px;color:var(--accent);padding:6px 17px;font-size:19px}
+.game-page-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:23px;margin:30px 0}
+.game-section{position:relative;isolation:isolate;padding:26px;border:1px solid var(--accent);border-radius:21px;background:#070909ee;box-shadow:0 0 20px #000b}
+.game-section h2{font-family:var(--font-title);color:var(--accent);font-weight:400;font-size:clamp(22px,2.4vw,29px);margin:0 0 17px}
+.game-section p{font-size:21px;line-height:1.5;margin:0 0 13px}
+.game-shop{margin-bottom:22px}
+.game-buy{display:inline-flex;align-items:center;justify-content:center;padding:14px 23px;margin:5px 15px 6px 0;border-radius:18px;text-decoration:none;background:var(--accent);color:#080808;font-size:23px;box-shadow:0 0 15px color-mix(in srgb,var(--accent) 45%,transparent)}
+.game-buy:hover{filter:brightness(1.1);box-shadow:0 0 25px var(--accent)}
+.game-secondary-link{display:inline-block;padding:12px 0;color:var(--accent);font-size:20px}
+.game-buy-note{color:#c9cdc7;font-size:18px!important;margin-top:13px!important}
+.game-back.bottom{margin-top:12px}
+@media(max-width:750px){.game-page-hero,.game-page-panels{grid-template-columns:1fr}.game-page{padding-top:15px}.game-section{padding:20px}.game-buy{width:100%;font-size:21px;text-align:center}.game-page .game-title{font-size:clamp(30px,7vw,47px)}}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
@@ -257,9 +281,35 @@ const games=[
  ['Golf With Your Friends','Mini-golf multijoueur','#ff8e39','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/431240/header.jpg','Mini-golf déjanté : chaque parcours peut renverser le classement.'],
  ['Jeu mystère','Révélation à venir','#FA1309',null,'Le quatrième tournoi est une surprise : le jeu sera dévoilé par l’organisation.']
 ];
+const gameSlugs=["halo-infinite","witch-it","golf-with-your-friends","jeu-mystere"];
+const shopLinks={"halo":"https://www.instant-gaming.com/fr/2674-acheter-halo-infinite-campaign-pc-xbox-one-jeu-microsoft-store/","witch":"https://www.instant-gaming.com/fr/2677-acheter-witch-it-pc-jeu-steam/","golf":"https://www.instant-gaming.com/fr/2482-acheter-golf-with-your-friends-pc-mac-jeu-steam/"};
+function gameDetailPage(slug){
+ const index=gameSlugs.indexOf(slug);if(index===-1)return page('jeux');
+ const g=games[index];
+ const mysterious=index===3;
+ const art=g[3]?'<img src="'+g[3]+'" alt="Illustration du jeu '+g[0]+'" loading="eager">':'<div class="game-cover-mystery" aria-hidden="true">?</div>';
+ const mainLink=index===0
+  ?'<a class="game-buy" href="https://store.steampowered.com/app/1240440/Halo_Infinite/" target="_blank" rel="noopener noreferrer">Télécharger gratuitement sur Steam ↗</a><a class="game-secondary-link" href="'+shopLinks.halo+'" target="_blank" rel="noopener noreferrer">Acheter la campagne solo sur Instant Gaming ↗</a><p class="game-buy-note">Le tournoi utilise le multijoueur gratuit. La campagne solo payante n’est pas nécessaire pour participer.</p>'
+  :index===1
+   ?'<a class="game-buy" href="'+shopLinks.witch+'" target="_blank" rel="noopener noreferrer">Acheter Witch It sur Instant Gaming ↗</a>'
+   :index===2
+    ?'<a class="game-buy" href="'+shopLinks.golf+'" target="_blank" rel="noopener noreferrer">Acheter Golf With Your Friends sur Instant Gaming ↗</a>'
+    :'<p class="game-buy-note">Le jeu sera dévoilé prochainement. Aucun achat nécessaire pour le moment.</p>';
+ return '<div class="game-page" style="--accent:'+g[2]+'">'+
+ '<button class="game-back" type="button" data-page="jeux">← Retour aux jeux et tournois</button>'+
+ '<div class="game-page-hero"><div class="game-page-art">'+art+'</div><div class="game-page-head"><span class="game-overline">PIPILAN · TOURNOI 0'+(index+1)+'</span><h1 class="page-title game-title">'+g[0]+'</h1><p class="game-lead">'+g[4]+'</p><div class="game-type">'+g[1]+'</div></div></div>'+
+ '<div class="game-page-panels"><section class="game-section"><h2>LE JEU</h2><p>'+
+ (index===0?'Halo Infinite est un jeu de tir à la première personne dans un univers de science-fiction. Le multijoueur est gratuit sur PC et Xbox.':
+ index===1?'Witch It est un jeu de cache-cache multijoueur : les sorcières se transforment en objets du décor pendant que les chasseurs tentent de les retrouver.':
+ index===2?'Golf With Your Friends est un jeu de mini-golf multijoueur avec des parcours thématiques, des obstacles et des rebondissements.':
+ 'Le titre et les mécaniques de ce tournoi restent secrets jusqu’à leur annonce.')+
+ '</p></section><section class="game-section"><h2>LE TOURNOI PIPILAN</h2><p>Les joueurs participent en équipes de trois, recomposées après chaque jeu. Un classement est établi pour chaque tournoi et contribue au classement général individuel.</p><p>Format exact, horaires et barème de points : à confirmer par les organisateurs.</p></section></div>'+
+ '<section class="game-section game-shop"><h2>'+(mysterious?'RÉVÉLATION À VENIR':'OBTENIR LE JEU')+'</h2>'+mainLink+'</section>'+
+ '<button class="game-back bottom" type="button" data-page="jeux">← Tous les jeux</button></div>';
+}
 function home(){return '<div class="hero-lockup"><h1 class="logo">PIPILAN</h1>'+controllerArt+'</div><div class="hero-grid"><div class="outline"><div class="video-box"><button id="preview" title="Teaser à intégrer au format MP4">▶</button></div></div><div class="outline info"><h2>◫ PIPILAN</h2><div class="rule"></div><span class="muted">PROCHAINE ÉDITION</span><b>Date à annoncer</b><span class="muted">Lieu à confirmer</span><div class="rule"></div><span class="muted">Inscriptions directement auprès des organisateurs</span></div></div><div class="tiles"><button class="tile" data-page="jeux" style="--accent:#C4F36D"><span class="symbol">⌘</span>JEUX & TOURNOIS</button><button class="tile" data-page="archives" style="--accent:#ffe05b"><span class="symbol">▧</span>ARCHIVES</button><button class="tile" data-page="programme" style="--accent:#ff923d"><span class="symbol">▦</span>PROGRAMME</button><button class="tile" data-page="infos" style="--accent:#FA1309"><span class="symbol">ⓘ</span>INFOS PRATIQUES</button></div><div class="scroll">⌄</div><section class="panel"><h2>Bienvenue à PIPILAN</h2><p>Quatre tournois : Halo Infinite, Witch It, Golf With Your Friends et un jeu mystère. Les équipes de trois joueurs sont reformées après chaque jeu.</p></section>'}
 const headings={programme:'Programme',jeux:'Jeux & tournois',classements:'Classements',infos:'Infos pratiques',archives:'Archives',partenaires:'Partenaires'};
-function page(p){let start='<h1 class="page-title">'+headings[p]+'</h1><div class="rule"></div>';if(p==='jeux')return start+'<p class="subtitle rankings-intro">Quatre tournois organisés. Les équipes de trois sont recomposées après chaque jeu.</p><div class="games-grid">'+games.map((g,i)=>'<button type="button" class="game-card" data-game="'+i+'" style="--accent:'+g[2]+'" aria-label="Voir les détails de '+g[0]+'">'+(g[3]?'<span class="game-art"><img src="'+g[3]+'" alt="Visuel officiel '+g[0]+'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'fallback-art\')"></span>':'<span class="game-art mystery-art" aria-hidden="true"><span class="mystery-symbol">?</span><span class="mystery-grid"></span></span>')+'<span class="game-card-copy"><span class="game-card-kicker">TOURNOI 0'+(i+1)+'</span><strong>'+g[0]+'</strong><span class="game-card-label">'+g[1]+'</span><span class="game-card-action">Découvrir le tournoi ↗</span></span></button>').join('')+'</div><div id="game-detail" class="game-detail" hidden></div>';if(p==='classements')return start+'<p class="subtitle rankings-intro">Classements par tournoi et classement général individuel cumulant les résultats des jeux terminés.</p><div class="tabs" id="tabs"><button class="selected" data-tab="general">Général individuel</button>'+games.map((g,i)=>'<button data-tab="'+i+'">'+g[0]+'</button>').join('')+'</div><div class="placeholder" id="ranking">Les résultats seront visibles ici après validation des organisateurs.</div>';if(p==='programme')return start+'<div class="panel"><h2>Programme à venir</h2><p>Les horaires et les animations seront ajoutés dès qu’ils seront fixés.</p></div>';if(p==='infos')return start+'<div class="panel"><h2>Préparer sa venue</h2><p>Adresse, horaires, accès et matériel à prévoir seront communiqués ici. Les joueurs s’inscrivent directement auprès de l’organisation : pas de formulaire d’inscription en ligne.</p></div>';if(p==='archives')return start+`<div class="archive-main"><div class="archive-main-intro"><h2>LES ÉDITIONS DE PIPILAN</h2><p>Retrouve les souvenirs, photos et vidéos des éditions précédentes.</p></div><div class="archive-window"><div class="archive-titlebar"><div class="archive-lights" aria-hidden="true"><span></span><span></span><span></span></div><strong>Choisir une édition</strong><div class="archive-winctrl" aria-hidden="true">─ □ ×</div></div><div class="archive-window-body"><div class="archive-choices"><button class="archive-choice active" data-archive-year="2024" aria-pressed="true"><span class="archive-calendar" aria-hidden="true">▣</span> 2024</button><button class="archive-choice" data-archive-year="2025" aria-pressed="false"><span class="archive-calendar" aria-hidden="true">▣</span> 2025</button><button class="archive-choice" data-archive-year="2026" aria-pressed="false"><span class="archive-calendar" aria-hidden="true">▣</span> 2026</button></div><div class="archive-detail"><div class="archive-computer" aria-hidden="true"><img src="./assets/pipilan-archive-computer-clean.webp" alt="" loading="lazy" decoding="async"></div><div class="archive-description" aria-live="polite"><span class="archive-eyebrow">DOSSIER / 2024</span><h3>Édition 2024</h3><p>Les photos, vidéos et souvenirs de cette édition seront ajoutés ici.</p><div class="archive-status">ARCHIVES À COMPLÉTER</div></div></div></div></div></div>`;return start+'<div class="panel"><h2>Nos partenaires</h2><p>Les logos et présentations des partenaires seront ajoutés une fois confirmés.</p></div>'}
+function page(p){if(p.startsWith('jeu-'))return gameDetailPage(p.slice(4));let start='<h1 class="page-title">'+headings[p]+'</h1><div class="rule"></div>';if(p==='jeux')return start+'<p class="subtitle rankings-intro">Quatre tournois organisés. Les équipes de trois sont recomposées après chaque jeu.</p><div class="games-grid">'+games.map((g,i)=>'<a class="game-card" href="#jeu-'+gameSlugs[i]+'" data-game="'+i+'" style="--accent:'+g[2]+'" aria-label="Voir la page de '+g[0]+'">'+(g[3]?'<span class="game-art"><img src="'+g[3]+'" alt="Visuel officiel '+g[0]+'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'fallback-art\')"></span>':'<span class="game-art mystery-art" aria-hidden="true"><span class="mystery-symbol">?</span><span class="mystery-grid"></span></span>')+'<span class="game-card-copy"><span class="game-card-kicker">TOURNOI 0'+(i+1)+'</span><strong>'+g[0]+'</strong><span class="game-card-label">'+g[1]+'</span><span class="game-card-action">Découvrir le tournoi ↗</span></span></a>').join('')+'</div><div id="game-detail" class="game-detail" hidden></div>';if(p==='classements')return start+'<p class="subtitle rankings-intro">Classements par tournoi et classement général individuel cumulant les résultats des jeux terminés.</p><div class="tabs" id="tabs"><button class="selected" data-tab="general">Général individuel</button>'+games.map((g,i)=>'<button data-tab="'+i+'">'+g[0]+'</button>').join('')+'</div><div class="placeholder" id="ranking">Les résultats seront visibles ici après validation des organisateurs.</div>';if(p==='programme')return start+'<div class="panel"><h2>Programme à venir</h2><p>Les horaires et les animations seront ajoutés dès qu’ils seront fixés.</p></div>';if(p==='infos')return start+'<div class="panel"><h2>Préparer sa venue</h2><p>Adresse, horaires, accès et matériel à prévoir seront communiqués ici. Les joueurs s’inscrivent directement auprès de l’organisation : pas de formulaire d’inscription en ligne.</p></div>';if(p==='archives')return start+`<div class="archive-main"><div class="archive-main-intro"><h2>LES ÉDITIONS DE PIPILAN</h2><p>Retrouve les souvenirs, photos et vidéos des éditions précédentes.</p></div><div class="archive-window"><div class="archive-titlebar"><div class="archive-lights" aria-hidden="true"><span></span><span></span><span></span></div><strong>Choisir une édition</strong><div class="archive-winctrl" aria-hidden="true">─ □ ×</div></div><div class="archive-window-body"><div class="archive-choices"><button class="archive-choice active" data-archive-year="2024" aria-pressed="true"><span class="archive-calendar" aria-hidden="true">▣</span> 2024</button><button class="archive-choice" data-archive-year="2025" aria-pressed="false"><span class="archive-calendar" aria-hidden="true">▣</span> 2025</button><button class="archive-choice" data-archive-year="2026" aria-pressed="false"><span class="archive-calendar" aria-hidden="true">▣</span> 2026</button></div><div class="archive-detail"><div class="archive-computer" aria-hidden="true"><img src="./assets/pipilan-archive-computer-clean.webp" alt="" loading="lazy" decoding="async"></div><div class="archive-description" aria-live="polite"><span class="archive-eyebrow">DOSSIER / 2024</span><h3>Édition 2024</h3><p>Les photos, vidéos et souvenirs de cette édition seront ajoutés ici.</p><div class="archive-status">ARCHIVES À COMPLÉTER</div></div></div></div></div></div>`;return start+'<div class="panel"><h2>Nos partenaires</h2><p>Les logos et présentations des partenaires seront ajoutés une fois confirmés.</p></div>'}
 
 let edgeObserver;
 
@@ -274,7 +324,7 @@ function attachEdgeRunners(){
    }
   }
  });
- const targets='nav,.outline,.tile,.panel,.rankings-intro,.game-card,.game-detail,.tabs button,.placeholder,.archive-main,.archive-window,.archive-choice,.discord-link,.cta,.video-box button';
+ const targets='nav,.outline,.tile,.panel,.rankings-intro,.game-card,.game-detail,.tabs button,.placeholder,.archive-main,.archive-window,.archive-choice,.discord-link,.cta,.video-box button,.game-page-art,.game-section,.game-back';
  document.querySelectorAll('nav button').forEach(btn=>{btn.classList.remove('neon-target');btn.querySelector(':scope > svg.edge-runner')?.remove();});
  document.querySelectorAll(targets).forEach((el,i)=>{
   el.classList.add('neon-target');
@@ -339,30 +389,12 @@ function drawRunner(el){
  }
  el.dataset.pathLength=String(len);
 }
-function go(p){if(!headings[p]&&p!=='accueil')p='accueil';app.innerHTML=p==='accueil'?home():page(p);document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));history.replaceState(null,'','#'+p);attachEdgeRunners();scrollTo({top:0,behavior:'smooth'})}
+function go(p,replace=false){if(!headings[p]&&p!=='accueil'&&!gameSlugs.some(slug=>p==='jeu-'+slug))p='accueil';app.innerHTML=p==='accueil'?home():page(p);document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(p.startsWith('jeu-')?'jeux':p)));if(location.hash.slice(1)!==p){history[replace?'replaceState':'pushState'](null,'','#'+p)}attachEdgeRunners();scrollTo({top:0,behavior:'smooth'})}
 document.addEventListener('click',e=>{
-const card=e.target.closest('[data-game]');
-if(card){
- const index=Number(card.dataset.game);
- const g=games[index],detail=document.querySelector('#game-detail');
- if(!g||!detail)return;
- const selected=card.getAttribute('aria-expanded')==='true';
- document.querySelectorAll('[data-game]').forEach(b=>{b.setAttribute('aria-expanded','false');b.classList.remove('chosen')});
- if(selected){detail.hidden=true;detail.innerHTML='';return}
- card.setAttribute('aria-expanded','true');card.classList.add('chosen');
- detail.innerHTML='<span class="game-detail-eyebrow">TOURNOI 0'+(index+1)+'</span><h2>'+g[0]+'</h2><p>'+g[4]+'</p><p>Les équipes comptent trois joueurs et sont reformées après chaque jeu. Le barème de points, le format précis et les horaires seront annoncés par les organisateurs.</p><button type="button" class="game-detail-close" data-close-game>Fermer ×</button>';
- detail.hidden=false;
- detail.style.setProperty('--accent',g[2]);
- attachEdgeRunners();
- return;
-}
-if(e.target.closest('[data-close-game]')){
- const detail=document.querySelector('#game-detail');if(detail){detail.hidden=true;detail.innerHTML=''}
- document.querySelectorAll('[data-game]').forEach(b=>{b.setAttribute('aria-expanded','false');b.classList.remove('chosen')});
- return;
-}
+const card=e.target.closest('[data-game]');if(card){e.preventDefault();go('jeu-'+gameSlugs[Number(card.dataset.game)]);return;}
 const archive=e.target.closest('[data-archive-year]');if(archive){const year=archive.dataset.archiveYear;document.querySelectorAll('.archive-choice').forEach(b=>{const selected=b.dataset.archiveYear===year;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected))});const desc=document.querySelector('.archive-description');if(desc){desc.querySelector('.archive-eyebrow').textContent='DOSSIER / '+year;desc.querySelector('h3').textContent='Édition '+year;}return;}
 const b=e.target.closest('[data-page]');if(b){go(b.dataset.page);return}const t=e.target.closest('[data-tab]');if(t){document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('selected',x===t));document.querySelector('#ranking').textContent='Aucun résultat publié pour '+(t.dataset.tab==='general'?'le classement général':games[Number(t.dataset.tab)][0])+'.';return}if(e.target.closest('#preview')){const x=e.target.closest('#preview');x.textContent='Vidéo MP4 à venir';x.style.width='auto';x.style.padding='15px 20px';x.style.fontSize='14px';x.style.borderRadius='28px'}});
-go(location.hash.slice(1)||'accueil');
+window.addEventListener('popstate',()=>go(location.hash.slice(1)||'accueil',true));
+go(location.hash.slice(1)||'accueil',true);
 
 </script></body></html>
