@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="googlebot" content="noindex,nofollow"><meta name="theme-color" content="#050505"><title>PIPILAN — Prototype</title>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Coral+Pixels&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'Technocra PIPILAN';src:url('./assets/technocra-logo.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
 
@@ -131,6 +131,32 @@ radial-gradient(ellipse 30% 25% at 100% 83%,#ff8a321a,transparent),
 .archive-computer img{width:100%;height:auto;max-width:190px;display:block;object-fit:contain;image-rendering:auto;mix-blend-mode:normal;filter:drop-shadow(0 0 7px #C4F36D45)}
 @media(max-width:600px){.archive-computer{flex-basis:124px;width:124px;min-height:104px;transform:none;margin:0}.archive-computer img{max-width:124px}}
 @media(max-width:390px){.archive-computer{height:auto;min-height:104px;transform:none;margin:0}}
+
+/* Typographie PIPILAN : Technocra logo, Press Start 2P interface, Coral Pixels textes */
+:root{--font-body:'Coral Pixels',monospace;--font-interface:'Press Start 2P',monospace}
+body{font-family:var(--font-body);font-weight:400}
+.logo,.hero-lockup .logo{font-family:'Technocra PIPILAN',sans-serif;font-weight:400;font-style:normal}
+nav button,.discord-link span,.page-title,.info h2,.panel h2,.game h2,
+.archive-main-intro h2,.archive-titlebar strong,.archive-description h3,
+.archive-choice,.archive-eyebrow,.archive-status,.archive-screen-text,
+.tile,.tabs button,.footer strong,.cta,.game .num,.archive-choices button{
+font-family:var(--font-interface);font-weight:400;line-height:1.6}
+nav button{font-size:clamp(8px,.74vw,11px);padding:12px 13px;letter-spacing:-.025em}
+.discord-link span{font-size:10px}
+.page-title{font-size:clamp(25px,4.1vw,45px);line-height:1.45}
+.info h2{font-size:clamp(16px,1.6vw,22px)}
+.panel h2{font-size:clamp(14px,1.7vw,21px)}
+.game h2{font-size:clamp(18px,2.2vw,25px)}
+.tile{font-size:clamp(11px,1.2vw,14px)}
+.tabs button{font-size:10px;line-height:1.5}
+.archive-main-intro h2{font-size:clamp(16px,2.3vw,26px)}
+.archive-titlebar strong{font-size:12px}
+.archive-description h3{font-size:clamp(15px,2vw,22px)}
+.archive-choice{font-size:clamp(14px,1.7vw,21px)}
+.archive-eyebrow,.archive-status{font-size:10px}
+p,.subtitle,.panel p,.archive-main-intro p,.archive-description p,.game p,.info .muted,.placeholder{font-family:var(--font-body);font-weight:400;line-height:1.6}
+@media(max-width:800px){nav button{font-size:9px;padding:11px 12px}}
+@media(max-width:600px){.archive-choice{font-size:13px}.archive-titlebar strong{font-size:10px}.archive-main-intro h2{font-size:16px}.tile{font-size:10px}}
 </style><link rel="icon" type="image/webp" href="./assets/pipilan-controller-original.webp"></head><body>
 <div class="backdrop"></div><div class="floor"></div>
 <svg class="neon-network" viewBox="0 0 1440 1000" preserveAspectRatio="none" aria-hidden="true">
